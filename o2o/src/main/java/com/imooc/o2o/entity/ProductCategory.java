@@ -2,7 +2,7 @@ package com.imooc.o2o.entity;
 
 import java.util.Date;
 
-public class productCategory {
+public class ProductCategory {
 	// 商品类别ID
 	private Long productCategoryId;
 	// 店铺ID
