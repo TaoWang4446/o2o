@@ -1,0 +1,6 @@
+2019-01-03 16:48:32.615 [main] DEBUG com.imooc.o2o.dao.ShopDao.insertShop - ==>  Preparing: INSERT INTO tb_shop(owner_id, area_id, shop_category_id, shop_name, shop_desc, shop_addr, phone, shop_img, priority, create_time, last_edit_time, enable_status, advice) VALUES (?,?,?,?, ?,?,?,?,?, ?,?, ?,?) 
+2019-01-03 16:48:32.657 [main] DEBUG com.imooc.o2o.dao.ShopDao.insertShop - ==> Parameters: 1(Long), 2(Integer), 1(Long), 测试的店铺(String), test(String), test(String), 1555555555(String), test(String), null, 2019-01-03 16:48:32.157(Timestamp), null, 1(Integer), 审核中(String)
+2019-01-03 16:48:32.664 [main] DEBUG com.imooc.o2o.dao.ShopDao.insertShop - <==    Updates: 1
+2019-01-03 16:58:45.658 [main] DEBUG com.imooc.o2o.dao.ShopDao.updateShop - ==>  Preparing: update tb_shop SET shop_desc=?, shop_addr=?, last_edit_time=? where shop_id=? 
+2019-01-03 16:58:45.703 [main] DEBUG com.imooc.o2o.dao.ShopDao.updateShop - ==> Parameters: 测试描述(String), 测试地址(String), 2019-01-03 16:58:45.188(Timestamp), 1(Long)
+2019-01-03 16:58:45.709 [main] DEBUG com.imooc.o2o.dao.ShopDao.updateShop - <==    Updates: 1
