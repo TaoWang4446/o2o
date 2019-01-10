@@ -92,7 +92,7 @@ public class ImageUtil {
 	 * 
 	 * @param targetAddr
 	 */
-	private static void makeDirPath(String targetAddr) {
+	public static void makeDirPath(String targetAddr) {
 		String realFileParentPath = PathUtil.getImgBasePath() + targetAddr;
 		File dirPath = new File(realFileParentPath);
 		if (!dirPath.exists()) {
@@ -110,7 +110,7 @@ public class ImageUtil {
 		String originalFileName = cFile.getOriginalFilename();
 		return originalFileName.substring(originalFileName.lastIndexOf("."));
 	}*/
-	private static String getFileExtension(File cFile) {
+	public static String getFileExtension(File cFile) {
 		String originalFileName = cFile.getName();
 		return originalFileName.substring(originalFileName.lastIndexOf("."));
 	}
@@ -120,7 +120,7 @@ public class ImageUtil {
 	 * 
 	 * @return
 	 */
-	private static String getRandomFileName() {
+	public static String getRandomFileName() {
 		// 获取随机的五位数
 		int rannum = r.nextInt(89999) + 10000;
 		String nowTimeStr = sDateFormat.format(new Date());
