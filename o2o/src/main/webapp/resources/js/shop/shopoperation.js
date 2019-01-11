@@ -49,6 +49,13 @@ $(function() {
 			var formData = new FormData();
 			forData.append('shopImg',shopImg);
 			forData.append('shopStr',JSON.stringify(shop));
+			var verifyCodeActual = $('#j_captcha').val();
+			if(!verifyCodeActual){
+				$.toast('请输入验证码！');
+				return;
+			}
+			
+			forData.append('verifyCodeActual',verifyCodeActual);
 			
 		    $.ajax({
 		    	url:registerShopUrl,
@@ -63,6 +70,7 @@ $(function() {
 					} else {
 						$.toast('提交失败！' + data.errMsg);
 					}
+					$('#captcha_img').click();
 				}
 		    });
 		});
