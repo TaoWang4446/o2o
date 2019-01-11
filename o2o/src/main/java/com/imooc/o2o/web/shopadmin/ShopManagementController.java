@@ -22,6 +22,7 @@ import com.imooc.o2o.dto.ShopExecution;
 import com.imooc.o2o.entity.PersonInfo;
 import com.imooc.o2o.entity.Shop;
 import com.imooc.o2o.enums.ShopStateEnum;
+import com.imooc.o2o.exceptions.ShopOperationException;
 import com.imooc.o2o.service.ShopService;
 import com.imooc.o2o.util.HttpServletRequestUtil;
 import com.imooc.o2o.util.ImageUtil;
@@ -66,28 +67,38 @@ public class ShopManagementController {
 			PersonInfo owner = new PersonInfo();
 			owner.setUserId(1L);
 			shop.setOwner(owner);
-			File shopImgFile = new File(PathUtil.getImgBasePath() + ImageUtil.getRandomFileName());
-			try {
+			/*File shopImgFile = new File(PathUtil.getImgBasePath() + ImageUtil.getRandomFileName());*/
+			/*try {
 				shopImgFile.createNewFile();
 			} catch (IOException e) {
 				modelMap.put("success", false);
 				modelMap.put("errMsg", e.getMessage());
 				return modelMap;
-			}
-			try {
+			}*/
+			/*try {
 				inputStreamToFile(shopImg.getInputStream(), shopImgFile);
 			} catch (IOException e) {
 				modelMap.put("success", false);
 				modelMap.put("errMsg", e.getMessage());
 				return modelMap;
-			}
-			ShopExecution se = shopService.addShop(shop, shopImgFile);
-			if (se.getState() == ShopStateEnum.CHECK.getState()) {
-				modelMap.put("success", true);
-			} else {
+			}*/
+			ShopExecution se;
+			try {
+				se = shopService.addShop(shop, shopImg.getInputStream(), shopImg.getOriginalFilename());
+				if (se.getState() == ShopStateEnum.CHECK.getState()) {
+					modelMap.put("success", true);
+				} else {
+					modelMap.put("success", false);
+					modelMap.put("errMsg", se.getStateInfo());
+				}
+			} catch (ShopOperationException e) {
 				modelMap.put("success", false);
-				modelMap.put("errMsg", se.getStateInfo());
+				modelMap.put("errMsg", e.getMessage());
+			} catch (IOException e) {
+				modelMap.put("success", false);
+				modelMap.put("errMsg", e.getMessage());
 			}
+			
 			// 3.返回结果
 			return modelMap;
 		} else {
@@ -97,7 +108,7 @@ public class ShopManagementController {
 		}
 	}
 
-	private static void inputStreamToFile(InputStream ins, File file) {
+	/*private static void inputStreamToFile(InputStream ins, File file) {
 		FileOutputStream os = null;
 		try {
 			os = new FileOutputStream(file);
@@ -120,5 +131,5 @@ public class ShopManagementController {
 				throw new RuntimeException("inputStreamToFile关闭IO产生异常:" + e.getMessage());
 			}
 		}
-	}
+	}*/
 }

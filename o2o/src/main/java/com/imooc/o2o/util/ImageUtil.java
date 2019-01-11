@@ -2,6 +2,7 @@ package com.imooc.o2o.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -67,9 +68,9 @@ public class ImageUtil {
 		return realtiveAddr;// 图片的路径
 	}*/
 
-	public static String generateThumbnail(File thumbnail, String targetAddr) {
+	public static String generateThumbnail(InputStream thumbnailInputStream, String fileName, String targetAddr) {
 		String realFileName = getRandomFileName();
-		String extension = getFileExtension(thumbnail);
+		String extension = getFileExtension(fileName);
 		makeDirPath(targetAddr);
 		String realtiveAddr = targetAddr + realFileName + extension;
 		logger.debug("当前相对路径是: " + realtiveAddr);
@@ -77,7 +78,7 @@ public class ImageUtil {
 		logger.debug("当前全路径是: " + dest);
 		try {
 			/*Thumbnails.of(thumbnail.getInputStream()).size(200, 200)*/
-			Thumbnails.of(thumbnail).size(200, 200)
+			Thumbnails.of(thumbnailInputStream).size(200, 200)
 					.watermark(Positions.BOTTOM_RIGHT, ImageIO.read(new File(basePath + "/watermark.jpg")), 0.25f)
 					.outputQuality(0.8f).toFile(dest);
 		} catch (Exception e) {
@@ -110,9 +111,12 @@ public class ImageUtil {
 		String originalFileName = cFile.getOriginalFilename();
 		return originalFileName.substring(originalFileName.lastIndexOf("."));
 	}*/
-	public static String getFileExtension(File cFile) {
+	/*public static String getFileExtension(File cFile) {
 		String originalFileName = cFile.getName();
 		return originalFileName.substring(originalFileName.lastIndexOf("."));
+	}*/
+	public static String getFileExtension(String fileName) {
+		return fileName.substring(fileName.lastIndexOf("."));
 	}
 
 	/**
