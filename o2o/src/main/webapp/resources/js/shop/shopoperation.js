@@ -47,15 +47,15 @@ $(function() {
 			var shopImg = $('#shop-img')[0].files[0];
 			// 生成表单对象，用于接收参数并传递给后台
 			var formData = new FormData();
-			forData.append('shopImg',shopImg);
-			forData.append('shopStr',JSON.stringify(shop));
+			formData.append('shopImg',shopImg);
+			formData.append('shopStr',JSON.stringify(shop));
 			var verifyCodeActual = $('#j_captcha').val();
 			if(!verifyCodeActual){
 				$.toast('请输入验证码！');
 				return;
 			}
 			
-			forData.append('verifyCodeActual',verifyCodeActual);
+			formData.append('verifyCodeActual',verifyCodeActual);
 			
 		    $.ajax({
 		    	url:registerShopUrl,
