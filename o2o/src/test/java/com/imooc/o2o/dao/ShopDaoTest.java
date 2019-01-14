@@ -21,20 +21,29 @@ public class ShopDaoTest extends BaseTest {
 	private ShopDao shopDao;
 
 	@Test
+	//@Ignore
+	public void testQueryByShopId() {
+		long shopId = 1;
+		Shop shop = shopDao.queryByShopId(shopId);
+		System.out.println("areaId:" + shop.getArea().getAreaId());
+		System.out.println("areaName" + shop.getArea().getAreaName());
+	}
+
+	@Test
 	@Ignore
 	public void testInsertShop() {
 		Shop shop = new Shop();
 		PersonInfo owner = new PersonInfo();
 		Area area = new Area();
 		ShopCategory shopCategory = new ShopCategory();
-		
+
 		owner.setUserId(1L);
 		area.setAreaId(2);
 		shopCategory.setShopCategoryId(1L);
 		shop.setOwner(owner);
 		shop.setArea(area);
 		shop.setShopCategory(shopCategory);
-		
+
 		shop.setShopName("测试的店铺");
 		shop.setShopDesc("test");
 		shop.setShopAddr("test");
@@ -43,20 +52,20 @@ public class ShopDaoTest extends BaseTest {
 		shop.setCreateTime(new Date());
 		shop.setEnableStatus(1);
 		shop.setAdvice("审核中");
-		
+
 		int effectNum = shopDao.insertShop(shop);
 		assertEquals(1, effectNum);
 	}
-	
+
 	@Test
 	public void testUpdateShop() {
 		Shop shop = new Shop();
 		shop.setShopId(1L);
-		
+
 		shop.setShopDesc("测试描述");
 		shop.setShopAddr("测试地址");
 		shop.setLastEditTime(new Date());
-		
+
 		int effectNum = shopDao.updateShop(shop);
 		assertEquals(1, effectNum);
 	}
