@@ -16,11 +16,24 @@ import com.imooc.o2o.entity.PersonInfo;
 import com.imooc.o2o.entity.Shop;
 import com.imooc.o2o.entity.ShopCategory;
 import com.imooc.o2o.enums.ShopStateEnum;
+import com.imooc.o2o.exceptions.ShopOperationException;
 
 public class ShopServiceTest extends BaseTest {
 
 	@Autowired
 	private ShopService shopService;
+
+	@Test
+	// @Ignore
+	public void testModifyShop() throws ShopOperationException, FileNotFoundException {
+		Shop shop = new Shop();
+		shop.setShopId(1L);
+		shop.setShopName("修改后的店铺名称");
+		File shopImg = new File("D:/xiaohuangren.jpg");
+		InputStream is = new FileInputStream(shopImg);
+		ShopExecution shopExecution = shopService.modifyShop(shop, is, "dabai.jpg");
+		System.out.println("新的图片地址为：" + shopExecution.getShop().getShopImg());
+	}
 
 	@Test
 	public void testGetAreaList() throws FileNotFoundException {
